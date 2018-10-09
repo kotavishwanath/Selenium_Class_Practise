@@ -22,7 +22,7 @@ public class AutoselectWithClicksAndNavigation {
 		driver.findElement(By.id("wp-submit")).click();
 		
 		driver.quit();
-		
+		//How to identify this herf anchor tag when there is no particular identifier.
 //		<a href="http://store.demoqa.com/wp-login.php?action=register">Register</a>
 	}
 
