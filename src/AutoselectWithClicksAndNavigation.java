@@ -21,6 +21,8 @@ public class AutoselectWithClicksAndNavigation {
 		
 		driver.findElement(By.id("wp-submit")).click();
 		
+		driver.quit();
+		
 //		<a href="http://store.demoqa.com/wp-login.php?action=register">Register</a>
 	}
 
