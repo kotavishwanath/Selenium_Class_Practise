@@ -1,11 +1,13 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
 
 import com.sun.org.apache.xerces.internal.impl.xpath.XPath;
 
@@ -57,8 +59,23 @@ public class AutoselectWithClicksAndNavigation {
 		driver.get("https://www.tkmaxx.com/uk/en/");
 		driver.findElement(By.xpath("//*[@id='miniCartSlot']/ul/li[3]/a/span")).click();
 		Thread.sleep(3000);
-		driver.findElement(By.xpath("//*[@class='register-tab active']/a")).click();
+		Set<String> setary = driver.getWindowHandles();
+		System.out.println("Count "+setary.size());
+		for (String s: setary){
+			driver.switchTo().window(s);
+		}
+//		driver.findElement(By.xpath("//*[@class='register-tab active' and @role='presentation']/a/h3")).click();
+		driver.findElement(By.xpath("//a/h3[contains(text(),'Register')]")).click();
 //		driver.findElement(By.xpath("html/body/main/div[4]/div[2]/div[3]/ul/li[2]")).click();
+		driver.findElement(By.xpath("//*[@class='label']")).click();
+		Thread.sleep(2000);
+		driver.findElement(By.xpath("//li[contains(text(),'Mr.')]")).click();
+		
+		if(driver.findElement(By.xpath("//*[@class='label']")).getText().equals("Mr.")){
+			//If not validated we will abort
+		}
+		
+		
 		driver.findElement(By.xpath("//*[@id='tjxRegisterForm']/div[1]/div/div/div/div/div[2]/span")).click();
 		driver.findElement(By.xpath("//*[@id='tjxRegisterForm']/div[1]/div/div/div/div/div[3]/div/ul/li[2]")).click();
 		driver.findElement(By.id("registerFirstName")).sendKeys("first name");
@@ -71,6 +88,21 @@ public class AutoselectWithClicksAndNavigation {
 		driver.findElement(By.xpath("//*[@id='tjxRegisterForm']/div[8]/div[2]/div/label")).click();
 		driver.findElement(By.xpath("//*[@id='miniCartSlot']/ul/li[3]/a/span")).click();
 		
+		
+		
+		/*
+		driver.get("https://www.facebook.com/");
+		Select ddlDay = new Select(driver.findElement(By.id("day")));
+		ddlDay.selectByVisibleText("4");
+		
+		Select ddlMonth = new Select(driver.findElement(By.id("month")));
+		ddlMonth.selectByVisibleText("Mar");
+		
+		Select ddlYear = new Select(driver.findElement(By.id("year")));
+		ddlYear.selectByVisibleText("2015");
+		
+		*/
+	
  
 	}
 
