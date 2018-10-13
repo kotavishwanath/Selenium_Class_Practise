@@ -7,6 +7,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
 import com.sun.org.apache.xerces.internal.impl.xpath.XPath;
@@ -55,7 +56,7 @@ public class AutoselectWithClicksAndNavigation {
 		 */
 		
 //		Loading tkmax site  
-		
+		/*
 		driver.get("https://www.tkmaxx.com/uk/en/");
 		driver.findElement(By.xpath("//*[@id='miniCartSlot']/ul/li[3]/a/span")).click();
 		Thread.sleep(3000);
@@ -67,13 +68,14 @@ public class AutoselectWithClicksAndNavigation {
 //		driver.findElement(By.xpath("//*[@class='register-tab active' and @role='presentation']/a/h3")).click();
 		driver.findElement(By.xpath("//a/h3[contains(text(),'Register')]")).click();
 //		driver.findElement(By.xpath("html/body/main/div[4]/div[2]/div[3]/ul/li[2]")).click();
+		Thread.sleep(4000);
 		driver.findElement(By.xpath("//*[@class='label']")).click();
-		Thread.sleep(2000);
+		Thread.sleep(4000);
 		driver.findElement(By.xpath("//li[contains(text(),'Mr.')]")).click();
 		
-		if(driver.findElement(By.xpath("//*[@class='label']")).getText().equals("Mr.")){
-			//If not validated we will abort
-		}
+//		if(driver.findElement(By.xpath("//*[@class='label']")).getText().equals("Mr.")){
+//			//If not validated we will abort
+//		}
 		
 		
 		driver.findElement(By.xpath("//*[@id='tjxRegisterForm']/div[1]/div/div/div/div/div[2]/span")).click();
@@ -88,7 +90,7 @@ public class AutoselectWithClicksAndNavigation {
 		driver.findElement(By.xpath("//*[@id='tjxRegisterForm']/div[8]/div[2]/div/label")).click();
 		driver.findElement(By.xpath("//*[@id='miniCartSlot']/ul/li[3]/a/span")).click();
 		
-		
+		*/
 		
 		/*
 		driver.get("https://www.facebook.com/");
@@ -102,6 +104,26 @@ public class AutoselectWithClicksAndNavigation {
 		ddlYear.selectByVisibleText("2015");
 		
 		*/
+		
+		
+		//Mouse over actions
+		driver.get("http://toolsqa.com/");
+		Thread.sleep(3000);
+		WebElement tutorialEle = driver.findElement(By.xpath("//ul[@id='primary-menu']//span[text()='Tutorial']"));
+		
+		Actions act = new Actions(driver);
+		act.moveToElement(tutorialEle).build().perform();
+		Thread.sleep(1000);
+		WebElement webAutomationEle = driver.findElement(By.xpath("//ul[@id='primary-menu']//span[text()='Web Automation Tools']"));
+		
+		act.moveToElement(webAutomationEle).build().perform();
+		Thread.sleep(1000);
+		WebElement testNGEle = driver.findElement(By.xpath("//ul[@id='primary-menu']//span[text()='Web Automation Tools']/ancestor::a/following-sibling::ul//span[text()='TestNG Tutorial']"));
+//		testNGEle.click();
+		
+		act.contextClick(testNGEle).build().perform();
+//		act.moveToElement(testNGEle).click().build().perform();
+//		act.contextClick(tutorialEle).build().perform();
 	
  
 	}
