@@ -107,6 +107,7 @@ public class AutoselectWithClicksAndNavigation {
 		
 		
 		//Mouse over actions
+		/*
 		driver.get("http://toolsqa.com/");
 		Thread.sleep(3000);
 		WebElement tutorialEle = driver.findElement(By.xpath("//ul[@id='primary-menu']//span[text()='Tutorial']"));
@@ -122,17 +123,73 @@ public class AutoselectWithClicksAndNavigation {
 //		testNGEle.click();
 		
 		act.contextClick(testNGEle).build().perform();
-//		act.moveToElement(testNGEle).click().build().perform();
+//		act.moveToElement(testNGEle).click().build().perform(); //Mouse over and scrolling to the visable area
 //		act.contextClick(tutorialEle).build().perform();
-	    //Waits
+		 * 
+		 */
+		
+	    //Waits - types dynamic Implict and explict waits
 		//switch
-		//frames
+		//  - frames
+		//	- Windows
+		//	- alerts
 		//external liberbies
 		//limitations
 		//framework
+		//TestNG - Take test cases for an regestration page then buid a framework for that end to end module. 
 		
 		
 		//This is test 1 branch
+		
+		//14th Oct, 2018
+		
+		//Switch to Alerts, frames and windows
+		//OS level alerts doesnt consider
+		//Web based alerts
+		
+		/*driver.switchTo().alert().accept();//Ok
+		driver.switchTo().alert().dismiss();//For dismiss
+		driver.switchTo().alert().sendKeys("Any Text");
+		driver.switchTo().alert().getText();//For checking/validating the alerts text
+		*/
+		
+		//Frames
+		//driver.switchTo().frame(arg0)
+		
+		/*
+		driver.get("http://toolsqa.com/iframe-practice-page/");
+		System.out.println(driver.findElements(By.xpath("//iframe")).size());
+//		driver.switchTo().frame(0);//Finding frames using Index.
+//		driver.findElement(By.xpath("//input[@name='firstname']")).sendKeys("Vish");
+		
+		driver.switchTo().frame(driver.findElement(By.id("IF1")));
+		Actions act1 = new Actions(driver);
+		WebElement frameEleFirstName = driver.findElement(By.xpath("//input[@name='firstname']"));
+		act1.moveToElement(frameEleFirstName);
+		frameEleFirstName.sendKeys("Vish");
+		
+		WebElement frameEleLastName = driver.findElement(By.xpath("//input[@name='lastname']"));
+		act1.moveToElement(frameEleLastName);
+		frameEleLastName.sendKeys("test");
+		*/
+		
+		driver.get("http://toolsqa.com/automation-practice-switch-windows/");
+//		System.out.println(driver.getWindowHandle());//Returns alpha numberic code which is unique		 
+		
+		driver.findElement(By.id("button1")).click();
+		driver.findElement(By.xpath("//button[text()='New Message Window']")).click();
+		driver.findElement(By.xpath("//button[text()='New Browser Tab']")).click();		
+		
+		Set<String> str = driver.getWindowHandles();
+		System.out.println("Windows count: "+str.size());
+		for(String s: str){
+			driver.switchTo().window(s);
+			System.out.println(s + " " + driver.getTitle());
+		}
+		
+		driver.close();//only closes current popup
+		driver.quit();//quits whole browser 
+	
 		
 	}
 
