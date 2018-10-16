@@ -1,14 +1,18 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.sun.org.apache.xerces.internal.impl.xpath.XPath;
 
@@ -173,9 +177,16 @@ public class AutoselectWithClicksAndNavigation {
 		frameEleLastName.sendKeys("test");
 		*/
 		
+		//Implicit Wait
+//		driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
+		
+		
+		
+		
 		driver.get("http://toolsqa.com/automation-practice-switch-windows/");
 //		System.out.println(driver.getWindowHandle());//Returns alpha numberic code which is unique		 
-		
+	
+		/*
 		driver.findElement(By.id("button1")).click();
 		driver.findElement(By.xpath("//button[text()='New Message Window']")).click();
 		driver.findElement(By.xpath("//button[text()='New Browser Tab']")).click();		
@@ -186,11 +197,97 @@ public class AutoselectWithClicksAndNavigation {
 			driver.switchTo().window(s);
 			System.out.println(s + " " + driver.getTitle());
 		}
+		*/
+		//Thread.sleep(3000);//Which is not safe to solve this we need to use Waits which should be dynamic 
+		//Implicit wait declare once use as many times which will be waiting for page to be loaded
+		//Explicit which will be waiting for particular element
 		
-		driver.close();//only closes current popup
-		driver.quit();//quits whole browser 
+	
+		
+		//Explicit wait and fluent wait
+		WebDriverWait wat = new WebDriverWait(driver, 60);//Default seconds it checks for every 500 milli seconds
+		wat.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[text()='New Message Window']")));
+		//elementToBeClickeable
+		//elementToBeVisiable
+		//Fluent wait does he same thing it supports pooling		
+		
+		
+		Actions act2 = new Actions(driver);
+		act2.moveToElement(driver.findElement(By.xpath("//*[@id='alert']")));
+		
+		driver.findElement(By.xpath("//*[@id='alert']")).click();
+		driver.switchTo().alert().accept();
+		
+//		act2.clickAndHold()
+		 act2.clickAndHold().build().perform();
+		 //wait
+//
+		
+		
+		WebElement timeingAlertEle =  driver.findElement(By.xpath("//*[@id='timingAlert']"));
+//		wat.until(ExpectedConditions.alertIsPresent());
+//		driver.switchTo().alert().accept();
+		
+		//Alertnative of click using java script 
+		//scrollWindow
+		((JavascriptExecutor) driver).executeScript("arguments[0].click()", timeingAlertEle);
+		wat.until(ExpectedConditions.alertIsPresent());
+		driver.switchTo().alert().accept();
+		//span[contains(text(),'Seconds remaining')]
+//		WebElement buzbuzEle = driver.findElement(By.xpath("//span[contains(text(),'Buzz  Buzz')]"));
+		WebElement timingEle = driver.findElement(By.xpath("//span[contains(text(),'Seconds remaining')]"));
+		
+//		wat.until(ExpectedConditions.textToBePresentInElementValue(buzbuzEle, "Buzz  Buzz"));
+//		wat.until(ExpectedConditions.invisibilityOf(timingEle));
+		
+		/*
+		wat.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[contains(text(),'Buzz  Buzz')]")));
+		
+		if(driver.findElement(By.xpath("//span[contains(text(),'Buzz  Buzz')]")).isDisplayed()){
+			System.out.println("Buzz Buzz presented");
+		}else{
+			System.out.println("Waiting");
+		}
+		*/
+		
+		/*
+		if(driver.findElement(By.id("123")).isDisplayed()){
+			System.out.println("Pass");
+		}else{
+			System.out.println("Fail");
+		}
+		*/
+		
+		System.out.println(driver.findElement(By.xpath("//*[@id='colorVar']")).getAttribute("style")); 
+		Thread.sleep(5000);
+		System.out.println(driver.findElement(By.xpath("//*[@id='colorVar']")).getAttribute("style"));
+//		System.out.println(driver.findElement(By.xpath("//*[@id='colorVar'][@style='color: white']")).getAttribute("style"));
+		
+		
+		//Override of methods for wait and fluent wait >>!!!!!
+		//isDisplay method hidden condition 
+		
+//		driver.close();//only closes current popup
+//		driver.quit();//quits whole browser 
 	
 		
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }
