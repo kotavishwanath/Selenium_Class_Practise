@@ -22,6 +22,7 @@ public class AutoselectWithClicksAndNavigation {
 		// TODO Auto-generated method stub
 		System.setProperty("webdriver.chrome.driver", "/Users/VishwanathKota/Documents/WorkSpace/chromedriver");
 		WebDriver driver = new ChromeDriver();
+		try{
 		/*
 		driver.get("http://store.demoqa.com/");
 		
@@ -257,7 +258,7 @@ public class AutoselectWithClicksAndNavigation {
 			System.out.println("Fail");
 		}
 		*/
-		
+		driver.manage().window().maximize();
 		System.out.println(driver.findElement(By.xpath("//*[@id='colorVar']")).getAttribute("style")); 
 		Thread.sleep(5000);
 		System.out.println(driver.findElement(By.xpath("//*[@id='colorVar']")).getAttribute("style"));
@@ -267,10 +268,17 @@ public class AutoselectWithClicksAndNavigation {
 		//Override of methods for wait and fluent wait >>!!!!!
 		//isDisplay method hidden condition 
 		
-//		driver.close();//only closes current popup
-//		driver.quit();//quits whole browser 
-	
-		
+		//TestNG 
+		//Reading test data from Excel 
+//		/Users/VishwanathKota/Documents/WorkSpace/TestData.xlsx
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}finally{
+//			driver.close();//only closes current popup
+//			driver.quit();//quits whole browser 
+		}
 	}
 	
 	
