@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="suite1">
+	<test name="test2">
+		<groups>
+			<run>
+				<include name="3rd"/>
+				<include name="1st"/>
+			</run>
+		</groups>
+		<classes>
+			<!--  
+			<class name="testNG_Package.Before_Class"/>
+			<class name="testNG_Package.TC1"/>
+			<class name="testNG_Package.TC2"/>
+			<class name="testNG_Package.TC3"/>
+			-->
+			<class name="testNG_Package.TC1"/>
+		</classes>
+	</test>
+</suite>
